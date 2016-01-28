@@ -6,10 +6,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
+/*
+ * A Structure consist of two rows, top and bottom;
+ * Bottom row is the nodes that are below the nodes in the top row
+ * */
+public class Structure {
     private Row top, bottom;
 
-    public Tree(){
+    public Structure(){
         top = new Row();
         bottom = new Row();
     }
@@ -32,7 +36,7 @@ public class Tree {
     }
 
     public static int problem18(){
-        Tree tree = new Tree();
+        Structure structure = new Structure();
         List<String> values = new ArrayList<>();
 
         String[] inData= {
@@ -55,32 +59,32 @@ public class Tree {
         for(String row : inData){
             values.add(row);
         }
-        tree.initBottom(values.get(values.size()-1));
+        structure.initBottom(values.get(values.size()-1));
 
         for(int i = values.size()-2; i>0; i--){
-            tree.setTopAndMax(values.get(i));
-            tree.swapRows();
+            structure.setTopAndMax(values.get(i));
+            structure.swapRows();
         }
 
-        tree.setTopAndMax(values.get(0));
+        structure.setTopAndMax(values.get(0));
 
-        return tree.top.getRow().get(0).getMax();
+        return structure.top.getRow().get(0).getMax();
     }
 
     public static int problem67(){
-        Tree tree = new Tree();
+        Structure structure = new Structure();
         int max = 0;
         try{
-            List<String> list = Files.readAllLines(Paths.get("p067_triangle.txt"));
-            tree.initBottom(list.get(list.size()-1));
+            List<String> list = Files.readAllLines(Paths.get("/Users/Elisabeth Solheim/IdeaProjects/Project Euler/src/MaximumPathSum/p067_triangle.txt"));
+            structure.initBottom(list.get(list.size()-1));
             for(int i = list.size()-2; i>0; i--){
-                tree.setTopAndMax(list.get(i));
-                tree.swapRows();
+                structure.setTopAndMax(list.get(i));
+                structure.swapRows();
             }
 
-            tree.setTopAndMax(list.get(0));
+            structure.setTopAndMax(list.get(0));
 
-            max =  tree.top.getRow().get(0).getMax();
+            max =  structure.top.getRow().get(0).getMax();
         }catch(IOException e){
             e.printStackTrace();
         }
